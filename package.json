@@ -1,0 +1,32 @@
+{
+    "name": "project2-huong",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "node app.js",
+        "dev": "nodemon app.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/longlonglong173/project2-huong.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/longlonglong173/project2-huong/issues"
+    },
+    "homepage": "https://github.com/longlonglong173/project2-huong#readme",
+    "dependencies": {
+        "cors": "^2.8.5",
+        "dotenv": "^10.0.0",
+        "express": "^4.17.2",
+        "express-fileupload": "^1.2.1",
+        "jsonwebtoken": "^8.5.1",
+        "mongodb": "^4.2.2",
+        "mongoose": "^6.1.4",
+        "nodemon": "^2.0.15",
+        "path": "^0.12.7"
+    }
+}
