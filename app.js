@@ -28,10 +28,16 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cors());
 app.use(fileUpload());
 
-
 // ROUTE
 
+const taoId = require('./routes/id/taoIdList');
+app.use('/taoId', taoId);
 
+const themNguoiDung = require('./routes/user/themNguoiDung');
+app.use('/themNguoiDung', themNguoiDung);
+
+const layThongTin = require('./routes/user/layThongTin');
+app.use('/layThongTin', layThongTin);
 
 // CONNECT TO DATABASE
 const db = mongoose.connect(process.env.DB_CONNECTION, {
