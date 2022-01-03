@@ -36,8 +36,20 @@ app.use('/taoId', taoId);
 const themNguoiDung = require('./routes/user/themNguoiDung');
 app.use('/themNguoiDung', themNguoiDung);
 
-const layThongTin = require('./routes/user/layThongTin');
-app.use('/layThongTin', layThongTin);
+const layThongTinNguoiDung = require('./routes/user/layThongTin');
+app.use('/layThongTinNguoiDung', layThongTinNguoiDung);
+
+const themTour = require('./routes/tour/themTour');
+app.use('/themTour', themTour);
+
+const layThongTinTour = require('./routes/tour/layThongTin');
+app.use('/layThongTinTour', layThongTinTour);
+
+const datVe = require('./routes/booking/datVe');
+app.use('/datVe', datVe);
+
+const thongKeTour = require('./routes/booking/thongKeTour');
+app.use('/thongKeTour', thongKeTour);
 
 // CONNECT TO DATABASE
 const db = mongoose.connect(process.env.DB_CONNECTION, {
