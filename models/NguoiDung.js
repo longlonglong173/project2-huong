@@ -18,6 +18,10 @@ const ConversationRoomSchema = mongoose.Schema({
         type: String,
         require: true,
     },
+    token: {
+        type: String,
+        default: '',
+    },
     gioiTinh: {
         type: String,
         default: 'nam',
@@ -29,8 +33,12 @@ const ConversationRoomSchema = mongoose.Schema({
         type: String,
     },
     diaChi: {
-        type: String
-    }
+        type: String,
+    },
+    vai: {
+        type: String,
+        default: 'CLIENT', // CLIENT , MANAGER
+    },
 });
 
 module.exports = mongoose.model('NguoiDung', ConversationRoomSchema);

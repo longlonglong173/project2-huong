@@ -36,14 +36,36 @@ app.use('/taoId', taoId);
 const themNguoiDung = require('./routes/user/themNguoiDung');
 app.use('/themNguoiDung', themNguoiDung);
 
+const dangNhap = require('./routes/user/dangNhap');
+app.use('/dangNhap', dangNhap);
+
 const layThongTinNguoiDung = require('./routes/user/layThongTin');
 app.use('/layThongTinNguoiDung', layThongTinNguoiDung);
+
+const setVaiRoute = require('./routes/user/setVai');
+app.use('/setVai', setVaiRoute);
+
+const xoaNguoiDungRoute = require('./routes/user/xoaNguoiDung');
+app.use('/xoaNguoiDung', xoaNguoiDungRoute);
+
+//----- TOUR
 
 const themTour = require('./routes/tour/themTour');
 app.use('/themTour', themTour);
 
 const layThongTinTour = require('./routes/tour/layThongTin');
 app.use('/layThongTinTour', layThongTinTour);
+
+const timKiemTourTheoDiaDiemRoute = require('./routes/tour/timKiemTourTheoDiaDiem');
+app.use('/timKiemTourTheoDiaDiem', timKiemTourTheoDiaDiemRoute);
+
+const xoaTourRoute = require('./routes/tour/xoaTour');
+app.use('/xoaTour', xoaTourRoute);
+
+const suaTourRoute = require('./routes/tour/suaTour');
+app.use('/suaTour', suaTourRoute);
+
+//-----   BOOKING
 
 const datVe = require('./routes/booking/datVe');
 app.use('/datVe', datVe);

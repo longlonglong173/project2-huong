@@ -16,14 +16,23 @@ function userForm(user) {
     };
 }
 
+const danhSachVai = ['CLIENT', 'MANAGER'];
+
 router.get('/', async (req, res) => {
-    return res.json('Lay thong tin nguoi dung API');
+    return res.json('SET VAI API');
 });
 
 router.post('/', async (req, res) => {
     const reqMa = req.body.ma || null;
+    const reqVai = req.body.vai || null;
     try {
-        if (reqMa == null) {
+        if (reqMa == null || reqVai == null) {
+            return res.json({
+                success: false,
+            });
+        }
+
+        if (danhSachVai.findIndex((item) => item == reqVai) == -1) {
             return res.json({
                 success: false,
             });
@@ -37,6 +46,9 @@ router.post('/', async (req, res) => {
                 success: false,
             });
         }
+
+        nguoiDung.vai = reqVai;
+        await nguoiDung.save();
 
         return res.json({
             success: true,

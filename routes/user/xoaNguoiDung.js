@@ -3,21 +3,8 @@ const router = express.Router();
 const path = require('path');
 const NguoiDung = require(path.resolve('models/NguoiDung.js'));
 
-function userForm(user) {
-    return {
-        ten: user.ten || null,
-        gioiTinh: user.gioiTinh || null,
-        email: user.email || null,
-        soDT: user.soDT || null,
-        ma: user.ma || null,
-        diaChi: user.diaChi || null,
-        vai: user.vai || null,
-        token: user.token || '',
-    };
-}
-
 router.get('/', async (req, res) => {
-    return res.json('Lay thong tin nguoi dung API');
+    return res.json('Xoa Nguoi Dung API');
 });
 
 router.post('/', async (req, res) => {
@@ -32,15 +19,19 @@ router.post('/', async (req, res) => {
         const nguoiDung = await NguoiDung.findOne({
             ma: reqMa,
         });
+
         if (nguoiDung == null) {
             return res.json({
                 success: false,
             });
         }
 
+        await NguoiDung.findOneAndDelete({
+            ma: reqMa,
+        });
+
         return res.json({
             success: true,
-            data: userForm(nguoiDung),
         });
     } catch {
         return res.json({

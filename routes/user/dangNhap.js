@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const path = require('path');
 const NguoiDung = require(path.resolve('models/NguoiDung.js'));
+const jwt = require('jsonwebtoken');
 
 function userForm(user) {
     return {
@@ -17,30 +18,46 @@ function userForm(user) {
 }
 
 router.get('/', async (req, res) => {
-    return res.json('Lay thong tin nguoi dung API');
+    return res.json('DANG NHAP');
 });
 
 router.post('/', async (req, res) => {
-    const reqMa = req.body.ma || null;
+    const reqMaSoDN = req.body.maSoDN || null;
+    const reqMatKhau = req.body.matKhau || null;
     try {
-        if (reqMa == null) {
+        if (reqMaSoDN == null || reqMatKhau == null) {
             return res.json({
                 success: false,
             });
         }
 
         const nguoiDung = await NguoiDung.findOne({
-            ma: reqMa,
+            maSoDN: reqMaSoDN,
+            matKhau: reqMatKhau,
         });
+
         if (nguoiDung == null) {
             return res.json({
                 success: false,
             });
         }
 
+        const dataToken = {
+            maSoDN: reqMaSoDN,
+            matKhau: reqMatKhau,
+        };
+        const token = jwt.sign(dataToken, process.env.ACCESS_TOKEN_KEY, {
+            // expiresIn: '1h',
+        });
+        if (nguoiDung.token == '' || nguoiDung.token == null) {
+            nguoiDung.token = token;
+        }
+
+        await nguoiDung.save();
+
         return res.json({
-            success: true,
             data: userForm(nguoiDung),
+            success: true,
         });
     } catch {
         return res.json({

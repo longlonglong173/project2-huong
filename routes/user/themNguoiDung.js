@@ -3,6 +3,7 @@ const router = express.Router();
 const path = require('path');
 const NguoiDung = require(path.resolve('models/NguoiDung.js'));
 const IdList = require(path.resolve('models/IdList.js'));
+const jwt = require('jsonwebtoken');
 
 router.get('/', async (req, res) => {
     return res.json('Them nguoi dung API');
@@ -38,6 +39,14 @@ router.post('/', async (req, res) => {
         });
 
         const count = currentId.currentId + 1;
+
+        const dataToken = {
+            maSoDN: req.body.maSoDN,
+            matKhau: req.body.matKhau,
+        };
+        const token = jwt.sign(dataToken, process.env.ACCESS_TOKEN_KEY, {
+            // expiresIn: '1h',
+        });
 
         let newUser = new NguoiDung({
             maSoDN: reqMaSoDN,
