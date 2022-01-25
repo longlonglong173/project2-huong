@@ -36,6 +36,9 @@ const ConversationRoomSchema = mongoose.Schema({
     hinhAnh: {
         type: Array,
     },
+    slot: {
+        type: Number
+    }
 });
 
 module.exports = mongoose.model('Tour', ConversationRoomSchema);

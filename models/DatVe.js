@@ -14,6 +14,10 @@ const ConversationRoomSchema = mongoose.Schema({
         type: String,
         require: true,
     },
+    cccd: {
+        type: String,
+        require: true
+    },
     soDT: {
         type: String,
         require: true,

@@ -17,14 +17,14 @@ function tourForm(tour) {
 }
 
 router.get('/', async (req, res) => {
-    return res.json('Lay thong tin nguoi dung API');
+    return res.json('Lay thong tin tour API');
 });
 
 router.post('/', async (req, res) => {
     const reqMa = req.body.ma || null;
     try {
         if (reqMa == null) {
-            return res.json({
+            return res.status(400).json({
                 success: false,
             });
         }
@@ -33,12 +33,12 @@ router.post('/', async (req, res) => {
             ma: reqMa,
         });
         if (tour == null) {
-            return res.json({
+            return res.status(400).json({
                 success: false,
             });
         }
 
-        return res.json({
+        return res.status(200).json({
             success: true,
             data: tourForm(tour),
         });

@@ -14,6 +14,9 @@ const ConversationRoomSchema = mongoose.Schema({
         type: String,
         default: 'nguoi dung',
     },
+    cccd: {
+        type: String,
+    },
     ma: {
         type: String,
         require: true,

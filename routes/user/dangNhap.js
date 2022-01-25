@@ -26,7 +26,7 @@ router.post('/', async (req, res) => {
     const reqMatKhau = req.body.matKhau || null;
     try {
         if (reqMaSoDN == null || reqMatKhau == null) {
-            return res.json({
+            return res.status(400).json({
                 success: false,
             });
         }
@@ -37,7 +37,7 @@ router.post('/', async (req, res) => {
         });
 
         if (nguoiDung == null) {
-            return res.json({
+            return res.status(400).json({
                 success: false,
             });
         }
@@ -60,7 +60,7 @@ router.post('/', async (req, res) => {
             success: true,
         });
     } catch {
-        return res.json({
+        return res.status(400).json({
             success: false,
         });
     }

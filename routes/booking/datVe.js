@@ -9,6 +9,7 @@ function tourForm(tour) {
     return {
         ma: tour.ma,
         ten: tour.ten,
+        cccd: tour.cccd,
         thoiGian: tour.thoiGian,
         ngayKhoiHanh: tour.ngayKhoiHanh,
         noiKhoiHanh: tour.noiKhoiHanh,
@@ -24,6 +25,7 @@ function userForm(user) {
         email: user.email || null,
         soDT: user.soDT || null,
         diaChi: user.diaChi || null,
+        cccd: user.cccd || null,
     };
 }
 
@@ -45,16 +47,17 @@ router.post('/', async (req, res) => {
     const reqSoDT = req.body.soDT || null;
     const reqDiaChi = req.body.diaChi || null;
     const reqGhiChu = req.body.ghiChu || '';
-
+    const reqCccd = req.body.cccd || null
     try {
         if (
             reqMaTour == null ||
             reqTen == null ||
             reqEmail == null ||
             reqSoDT == null ||
-            reqDiaChi == null
+            reqDiaChi == null ||
+            reqCccd == null
         ) {
-            return res.json({
+            return res.status(400).json({
                 success: false,
             });
         }
@@ -77,6 +80,7 @@ router.post('/', async (req, res) => {
             ma: count,
             maTour: reqMaTour,
             ten: reqTen,
+            cccd: reqCccd,
             email: reqEmail,
             soDT: reqSoDT,
             diaChi: reqDiaChi,
