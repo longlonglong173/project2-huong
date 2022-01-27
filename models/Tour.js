@@ -20,24 +20,35 @@ const ConversationRoomSchema = mongoose.Schema({
     },
     noiKhoiHanh: {
         type: String,
+        default: ''
     },
     phuongTien: {
         type: String,
         require: true,
     },
-    gia: {
+    giaHienTai: {
         type: Number,
         require: true,
+    },
+    giaCu: {
+        type: Number,
+        default: 0
     },
     diaDiem: {
         type: String,
         require: true,
     },
     hinhAnh: {
-        type: Array,
+        type: String,
+        default: ''
     },
     slot: {
-        type: Number
+        type: Number,
+        default: 0
+    },
+    chiTiet: {
+        type: String,
+        default: ''
     }
 });
 

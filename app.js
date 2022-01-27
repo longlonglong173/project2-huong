@@ -56,6 +56,9 @@ app.use('/themTour', themTour);
 const layThongTinTour = require('./routes/tour/layThongTin');
 app.use('/layThongTinTour', layThongTinTour);
 
+const layDanhSachTourRoute = require('./routes/tour/layDanhSachTour');
+app.use('/layDanhSachTour', layDanhSachTourRoute);
+
 const timKiemTourTheoDiaDiemRoute = require('./routes/tour/timKiemTourTheoDiaDiem');
 app.use('/timKiemTourTheoDiaDiem', timKiemTourTheoDiaDiemRoute);
 

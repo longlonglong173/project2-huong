@@ -14,39 +14,37 @@ function tourForm(tour) {
         giaHienTai: tour.giaHienTai,
         giaCu: tour.giaCu,
         diaDiem: tour.diaDiem,
+        chiTiet: tour.chiTiet || '',
         hinhAnh: tour.hinhAnh
-
     };
 }
 
+// router.get('/', async (req, res) => {
+//     return res.json('Lay danh sach tour API');
+// });
+
 router.get('/', async (req, res) => {
-    return res.json('Lay thong tin tour API');
-});
-
-router.post('/', async (req, res) => {
-    const reqMa = req.body.ma || null;
+    const reqIndex = req.query.index || 0;
+    const reqCount = req.query.count || 20
     try {
-        if (reqMa == null) {
+
+        const tourList = await Tour.find()
+
+        if (reqIndex >= tourList.length) {
             return res.status(400).json({
                 success: false,
+                message: 'No data'
             });
         }
 
-        const tour = await Tour.findOne({
-            ma: reqMa,
-        });
-        if (tour == null) {
-            return res.status(400).json({
-                success: false,
-            });
-        }
-
+        const tourListCopy = tourList.slice(reqIndex, reqIndex + reqCount)
+        const result = tourListCopy.map(tour => tourForm(tour))
         return res.status(200).json({
             success: true,
-            data: tourForm(tour),
+            data: result,
         });
     } catch {
-        return res.json({
+        return res.status(400).json({
             success: false,
         });
     }

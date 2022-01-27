@@ -12,8 +12,10 @@ function tourForm(tour) {
         ngayKhoiHanh: tour.ngayKhoiHanh,
         noiKhoiHanh: tour.noiKhoiHanh,
         phuongTien: tour.phuongTien,
-        gia: tour.gia,
+        giaHienTai: tour.giaHienTai,
+        giaCu: tour.giaCu,
         diaDiem: tour.diaDiem,
+        hinhAnh: tour.hinhAnh,
     };
 }
 const danhSachVaiQL = ['ADMIN', 'MANAGER'];
@@ -24,43 +26,46 @@ router.get('/', async (req, res) => {
 
 router.post('/', async (req, res) => {
     const reqMa = req.body.ma || null;
-    const reqToken = req.body.token || null;
+    // const reqToken = req.body.token || null;
     try {
-        if (reqMa == null || reqToken) {
-            return res.json({
+        if (reqMa == null) {
+            return res.status(400).json({
                 success: false,
             });
         }
 
-        const nguoiDung = await NguoiDung.findOne({
-            token: reqToken,
-        });
+        // const nguoiDung = await NguoiDung.findOne({
+        //     token: reqToken,
+        // });
 
-        if (nguoiDung == null) {
-            return res.json({
-                success: false,
-                message: 'Token is invalid.',
-            });
-        }
+        // if (nguoiDung == null) {
+        //     return res.json({
+        //         success: false,
+        //         message: 'Token is invalid.',
+        //     });
+        // }
 
-        if (danhSachVaiQL.findIndex((item) => item == nguoiDung.vai) == -1) {
-            return res.json({
-                success: false,
-                message: 'Not Access.',
-            });
-        }
+        // if (danhSachVaiQL.findIndex((item) => item == nguoiDung.vai) == -1) {
+        //     return res.status(400).json({
+        //         success: false,
+        //         message: 'Not Access.',
+        //     });
+        // }
 
         const tour = await Tour.findOne({
             ma: reqMa,
         });
 
         if (tour == null) {
-            return res.json({
+            return res.status(400).json({
                 success: false,
             });
         }
 
         // UPDATE TOUR's INFOMATION
+        if (req.body.hinhAnh != null) {
+            tour.hinhAnh = req.body.hinhAnh;
+        }
         if (req.body.ten != null) {
             tour.ten = req.body.ten;
         }
@@ -78,8 +83,12 @@ router.post('/', async (req, res) => {
             tour.phuongTien = req.body.phuongTien;
         }
 
-        if (req.body.gia != null) {
-            tour.gia = req.body.gia;
+        if (req.body.giaHienTai != null) {
+            tour.giaHienTai = req.body.giaHienTai;
+        }
+
+        if (req.body.giaCu != null) {
+            tour.giaCu = req.body.giaCu;
         }
 
         if (req.body.diaDiem != null) {
@@ -89,16 +98,24 @@ router.post('/', async (req, res) => {
         if (req.body.hinhAnh != null) {
             tour.hinhAnh = req.body.hinhAnh;
         }
+
+        if (req.body.chiTiet != null) {
+            tour.chiTiet = req.body.chiTiet;
+        }
+
+        if (req.body.slot != null) {
+            tour.slot = req.body.slot;
+        }
         //
 
         await tour.save();
 
-        return res.json({
+        return res.status(200).json({
             data: tourForm(tour),
             success: true,
         });
     } catch {
-        return res.json({
+        return res.status(400).json({
             success: false,
         });
     }

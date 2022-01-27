@@ -12,8 +12,11 @@ function tourForm(tour) {
         ngayKhoiHanh: tour.ngayKhoiHanh,
         noiKhoiHanh: tour.noiKhoiHanh,
         phuongTien: tour.phuongTien,
-        gia: tour.gia,
+        giaHienTai: tour.giaHienTai,
+        giaCu: tour.giaCu,
         diaDiem: tour.diaDiem,
+        hinhAnh: tour.hinhAnh
+
     };
 }
 

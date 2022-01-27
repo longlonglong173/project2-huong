@@ -12,8 +12,10 @@ function tourForm(tour) {
         ngayKhoiHanh: tour.ngayKhoiHanh,
         noiKhoiHanh: tour.noiKhoiHanh,
         phuongTien: tour.phuongTien,
-        gia: tour.gia,
+        giaHienTai: tour.giaHienTai,
+        giaCu: tour.giaCu,
         diaDiem: tour.diaDiem,
+        hinhAnh: tour.hinhAnh
     };
 }
 
@@ -27,8 +29,11 @@ router.post('/', async (req, res) => {
     const reqNgayKhoiHanh = req.body.ngayKhoiHanh || null;
     const reqNoiKhoiHanh = req.body.noiKhoiHanh || null;
     const reqPhuongTien = req.body.phuongTien || null;
-    const reqGia = req.body.gia || null;
+    const reqGiaHienTai = req.body.giaHienTai || 0;
+    const reqGiaCu = req.body.giaCu || 0;
     const reqDiaDiem = req.body.diaDiem || null;
+    const reqHinhAnh = req.body.hinhAnh || null
+    const reqChiTiet = req.vody.chiTiet || ''
     try {
         if (
             reqTen == null ||
@@ -36,8 +41,9 @@ router.post('/', async (req, res) => {
             reqNgayKhoiHanh == null ||
             reqNoiKhoiHanh == null ||
             reqPhuongTien == null ||
-            reqGia == null ||
-            reqDiaDiem == null
+            reqGiaHienTai == null ||
+            reqDiaDiem == null ||
+            reqHinhAnh == null
         ) {
             return res.json({
                 success: false,
@@ -56,8 +62,11 @@ router.post('/', async (req, res) => {
             ngayKhoiHanh: reqNgayKhoiHanh,
             noiKhoiHanh: reqNoiKhoiHanh,
             phuongTien: reqPhuongTien,
-            gia: reqGia,
+            giaHienTai: reqGiaHienTai,
+            giaCu: reqGiaCu,
             diaDiem: reqDiaDiem,
+            hinhAnh: reqHinhAnh,
+            chiTiet: reqChiTiet
         });
 
         currentId.currentId = count;
