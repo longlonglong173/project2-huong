@@ -15,7 +15,7 @@ function tourForm(tour) {
         giaHienTai: tour.giaHienTai,
         giaCu: tour.giaCu,
         diaDiem: tour.diaDiem,
-        hinhAnh: tour.hinhAnh
+        hinhAnh: tour.hinhAnh,
     };
 }
 
@@ -32,8 +32,9 @@ router.post('/', async (req, res) => {
     const reqGiaHienTai = req.body.giaHienTai || 0;
     const reqGiaCu = req.body.giaCu || 0;
     const reqDiaDiem = req.body.diaDiem || null;
-    const reqHinhAnh = req.body.hinhAnh || null
-    const reqChiTiet = req.vody.chiTiet || ''
+    const reqHinhAnh = req.body.hinhAnh || null;
+    const reqChiTiet = req.body.chiTiet || '';
+    const reqSlot = req.body.slot || 0;
     try {
         if (
             reqTen == null ||
@@ -45,7 +46,7 @@ router.post('/', async (req, res) => {
             reqDiaDiem == null ||
             reqHinhAnh == null
         ) {
-            return res.json({
+            return res.status(400).json({
                 success: false,
             });
         }
@@ -66,7 +67,8 @@ router.post('/', async (req, res) => {
             giaCu: reqGiaCu,
             diaDiem: reqDiaDiem,
             hinhAnh: reqHinhAnh,
-            chiTiet: reqChiTiet
+            chiTiet: reqChiTiet,
+            slot: reqSlot,
         });
 
         currentId.currentId = count;
@@ -74,12 +76,12 @@ router.post('/', async (req, res) => {
 
         await tour.save();
 
-        return res.json({
+        return res.status(200).json({
             data: tourForm(tour),
             success: true,
         });
     } catch {
-        return res.json({
+        return res.status(400).json({
             success: false,
         });
     }
