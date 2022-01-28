@@ -42,8 +42,14 @@ app.use('/dangNhap', dangNhap);
 const layThongTinNguoiDung = require('./routes/user/layThongTin');
 app.use('/layThongTinNguoiDung', layThongTinNguoiDung);
 
+const layDanhSachNguoiDungRoute = require('./routes/user/layDanhSachNguoiDung');
+app.use('/layDanhSachNguoiDung', layDanhSachNguoiDungRoute);
+
 const setVaiRoute = require('./routes/user/setVai');
 app.use('/setVai', setVaiRoute);
+
+const suaNguoiDungRoute = require('./routes/user/suaNguoiDung');
+app.use('/suaNguoiDung', suaNguoiDungRoute);
 
 const xoaNguoiDungRoute = require('./routes/user/xoaNguoiDung');
 app.use('/xoaNguoiDung', xoaNguoiDungRoute);

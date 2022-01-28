@@ -2,22 +2,23 @@ const express = require('express');
 const router = express.Router();
 const path = require('path');
 const Tour = require(path.resolve('models/Tour.js'));
+const {tourForm} = require(path.resolve('modules/mixin.js'));
 
-function tourForm(tour) {
-    return {
-        ma: tour.ma,
-        ten: tour.ten,
-        thoiGian: tour.thoiGian,
-        ngayKhoiHanh: tour.ngayKhoiHanh,
-        noiKhoiHanh: tour.noiKhoiHanh,
-        phuongTien: tour.phuongTien,
-        giaHienTai: tour.giaHienTai,
-        giaCu: tour.giaCu,
-        diaDiem: tour.diaDiem,
-        hinhAnh: tour.hinhAnh
+// function tourForm(tour) {
+//     return {
+//         ma: tour.ma,
+//         ten: tour.ten,
+//         thoiGian: tour.thoiGian,
+//         ngayKhoiHanh: tour.ngayKhoiHanh,
+//         noiKhoiHanh: tour.noiKhoiHanh,
+//         phuongTien: tour.phuongTien,
+//         giaHienTai: tour.giaHienTai,
+//         giaCu: tour.giaCu,
+//         diaDiem: tour.diaDiem,
+//         hinhAnh: tour.hinhAnh
 
-    };
-}
+//     };
+// }
 
 router.get('/', async (req, res) => {
     return res.json('Lay thong tin tour API');

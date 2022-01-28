@@ -2,19 +2,7 @@ const express = require('express');
 const router = express.Router();
 const path = require('path');
 const NguoiDung = require(path.resolve('models/NguoiDung.js'));
-
-function userForm(user) {
-    return {
-        ten: user.ten || null,
-        gioiTinh: user.gioiTinh || null,
-        email: user.email || null,
-        soDT: user.soDT || null,
-        ma: user.ma || null,
-        diaChi: user.diaChi || null,
-        vai: user.vai || null,
-        token: user.token || '',
-    };
-}
+const { userForm } = require(path.resolve('modules/mixin.js'));
 
 router.get('/', async (req, res) => {
     return res.json('Lay thong tin nguoi dung API');
@@ -40,7 +28,7 @@ router.post('/', async (req, res) => {
 
         return res.json({
             success: true,
-            data: userForm(nguoiDung),
+            data: userForm(nguoiDung, true),
         });
     } catch {
         return res.json({

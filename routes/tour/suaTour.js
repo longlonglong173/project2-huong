@@ -3,22 +3,8 @@ const router = express.Router();
 const path = require('path');
 const Tour = require(path.resolve('models/Tour.js'));
 const NguoiDung = require(path.resolve('models/NguoiDung.js'));
-
-function tourForm(tour) {
-    return {
-        ma: tour.ma,
-        ten: tour.ten,
-        thoiGian: tour.thoiGian,
-        ngayKhoiHanh: tour.ngayKhoiHanh,
-        noiKhoiHanh: tour.noiKhoiHanh,
-        phuongTien: tour.phuongTien,
-        giaHienTai: tour.giaHienTai,
-        giaCu: tour.giaCu,
-        diaDiem: tour.diaDiem,
-        hinhAnh: tour.hinhAnh,
-    };
-}
 const danhSachVaiQL = ['ADMIN', 'MANAGER'];
+const {tourForm} = require(path.resolve('modules/mixin.js'));
 
 router.get('/', async (req, res) => {
     return res.json('Sua tour API');

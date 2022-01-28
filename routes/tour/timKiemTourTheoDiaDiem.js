@@ -3,22 +3,23 @@ const router = express.Router();
 const path = require('path');
 const Tour = require(path.resolve('models/Tour.js'));
 // const IdList = require(path.resolve('models/IdList.js'));
+const {tourForm} = require(path.resolve('modules/mixin.js'));
 
-function tourForm(tour) {
-    return {
-        ma: tour.ma,
-        ten: tour.ten,
-        thoiGian: tour.thoiGian,
-        ngayKhoiHanh: tour.ngayKhoiHanh,
-        noiKhoiHanh: tour.noiKhoiHanh,
-        phuongTien: tour.phuongTien,
-        giaHienTai: tour.giaHienTai,
-        giaCu: tour.giaCu,
-        diaDiem: tour.diaDiem,
-        hinhAnh: tour.hinhAnh
+// function tourForm(tour) {
+//     return {
+//         ma: tour.ma,
+//         ten: tour.ten,
+//         thoiGian: tour.thoiGian,
+//         ngayKhoiHanh: tour.ngayKhoiHanh,
+//         noiKhoiHanh: tour.noiKhoiHanh,
+//         phuongTien: tour.phuongTien,
+//         giaHienTai: tour.giaHienTai,
+//         giaCu: tour.giaCu,
+//         diaDiem: tour.diaDiem,
+//         hinhAnh: tour.hinhAnh
 
-    };
-}
+//     };
+// }
 
 router.get('/', async (req, res) => {
     return res.json('Tim Kiem Tour Theo Dia Diem API');
@@ -36,8 +37,6 @@ router.post('/', async (req, res) => {
         let danhSachKetQua = await Tour.find({
             diaDiem: { $regex: reqKeyword, $options: 'i' },
         });
-        console.log('OK');
-
         if (danhSachKetQua == []) {
             return res.json({
                 success: true,

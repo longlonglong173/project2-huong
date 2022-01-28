@@ -3,21 +3,7 @@ const router = express.Router();
 const path = require('path');
 const Tour = require(path.resolve('models/Tour.js'));
 const IdList = require(path.resolve('models/IdList.js'));
-
-function tourForm(tour) {
-    return {
-        ma: tour.ma,
-        ten: tour.ten,
-        thoiGian: tour.thoiGian,
-        ngayKhoiHanh: tour.ngayKhoiHanh,
-        noiKhoiHanh: tour.noiKhoiHanh,
-        phuongTien: tour.phuongTien,
-        giaHienTai: tour.giaHienTai,
-        giaCu: tour.giaCu,
-        diaDiem: tour.diaDiem,
-        hinhAnh: tour.hinhAnh,
-    };
-}
+const {tourForm} = require(path.resolve('modules/mixin.js'));
 
 router.get('/', async (req, res) => {
     return res.json('Them tour API');

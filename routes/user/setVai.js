@@ -2,19 +2,7 @@ const express = require('express');
 const router = express.Router();
 const path = require('path');
 const NguoiDung = require(path.resolve('models/NguoiDung.js'));
-
-function userForm(user) {
-    return {
-        ten: user.ten || null,
-        gioiTinh: user.gioiTinh || null,
-        email: user.email || null,
-        soDT: user.soDT || null,
-        ma: user.ma || null,
-        diaChi: user.diaChi || null,
-        vai: user.vai || null,
-        token: user.token || '',
-    };
-}
+const { userForm } = require(path.resolve('modules/mixin.js'));
 
 const danhSachVai = ['CLIENT', 'MANAGER'];
 
@@ -27,13 +15,13 @@ router.post('/', async (req, res) => {
     const reqVai = req.body.vai || null;
     try {
         if (reqMa == null || reqVai == null) {
-            return res.json({
+            return res.status(400).json({
                 success: false,
             });
         }
 
         if (danhSachVai.findIndex((item) => item == reqVai) == -1) {
-            return res.json({
+            return res.status(400).json({
                 success: false,
             });
         }
@@ -42,7 +30,7 @@ router.post('/', async (req, res) => {
             ma: reqMa,
         });
         if (nguoiDung == null) {
-            return res.json({
+            return res.status(400).json({
                 success: false,
             });
         }
@@ -50,12 +38,12 @@ router.post('/', async (req, res) => {
         nguoiDung.vai = reqVai;
         await nguoiDung.save();
 
-        return res.json({
+        return res.status(200).json({
             success: true,
             data: userForm(nguoiDung),
         });
     } catch {
-        return res.json({
+        return res.status(400).json({
             success: false,
         });
     }
