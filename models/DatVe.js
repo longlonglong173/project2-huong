@@ -6,6 +6,9 @@ const ConversationRoomSchema = mongoose.Schema({
         type: String,
         require: true,
     },
+    uuid: {
+        type: Number,  // id người đặt, nếu có trường này thì sẽ tự động lấy thông tin người dùng tương ứng với uuid này
+    },
     maTour: {
         type: Number,
         require: true,
@@ -16,7 +19,7 @@ const ConversationRoomSchema = mongoose.Schema({
     },
     cccd: {
         type: String,
-        require: true
+        require: true,
     },
     soDT: {
         type: String,
@@ -38,6 +41,9 @@ const ConversationRoomSchema = mongoose.Schema({
         type: Number,
         require: true,
     },
+    gioiTinh: {
+        type: String
+    }
 });
 
 module.exports = mongoose.model('DatVe', ConversationRoomSchema);

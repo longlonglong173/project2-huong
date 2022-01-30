@@ -79,6 +79,15 @@ app.use('/suaTour', suaTourRoute);
 const datVe = require('./routes/booking/datVe');
 app.use('/datVe', datVe);
 
+const suaVe = require('./routes/booking/suaVe');
+app.use('/suaVe', suaVe);
+
+const xoaVe = require('./routes/booking/xoaVe');
+app.use('/xoaVe', xoaVe);
+
+const layDanhSachVe = require('./routes/booking/layDanhSachVe');
+app.use('/layDanhSachVe', layDanhSachVe);
+
 const thongKeTour = require('./routes/booking/thongKeTour');
 app.use('/thongKeTour', thongKeTour);
 

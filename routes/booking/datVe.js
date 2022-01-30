@@ -4,50 +4,18 @@ const path = require('path');
 const IdList = require(path.resolve('models/IdList.js'));
 const Tour = require(path.resolve('models/Tour.js'));
 const DatVe = require(path.resolve('models/DatVe.js'));
-
-function tourForm(tour) {
-    return {
-        ma: tour.ma,
-        ten: tour.ten,
-        cccd: tour.cccd,
-        thoiGian: tour.thoiGian,
-        ngayKhoiHanh: tour.ngayKhoiHanh,
-        noiKhoiHanh: tour.noiKhoiHanh,
-        phuongTien: tour.phuongTien,
-        gia: tour.gia,
-        diaDiem: tour.diaDiem,
-    };
-}
-
-function userForm(user) {
-    return {
-        ten: user.ten || null,
-        email: user.email || null,
-        soDT: user.soDT || null,
-        diaChi: user.diaChi || null,
-        cccd: user.cccd || null,
-    };
-}
-
-function formDatVe(ve, tour) {
-    return {
-        ma: ve.ma,
-        thoiGianDat: ve.thoiGianDat,
-        tour: tourForm(tour),
-        thongTin: userForm(ve),
-        ghiChu: ve.ghiChu,
-    };
-}
+const { formDatVe } = require(path.resolve('modules/mixin.js'));
 
 router.post('/', async (req, res) => {
     const reqMaTour = req.body.maTour || null;
     // thong tin nguoi dung
+    const reqUuid = req.body.uuid || null;
     const reqTen = req.body.ten || null;
     const reqEmail = req.body.email || null;
     const reqSoDT = req.body.soDT || null;
     const reqDiaChi = req.body.diaChi || null;
     const reqGhiChu = req.body.ghiChu || '';
-    const reqCccd = req.body.cccd || null
+    const reqCccd = req.body.cccd || null;
     try {
         if (
             reqMaTour == null ||
@@ -66,7 +34,7 @@ router.post('/', async (req, res) => {
             ma: reqMaTour,
         });
         if (tour == null) {
-            return res.json({
+            return res.status(400).json({
                 success: false,
             });
         }
@@ -79,6 +47,7 @@ router.post('/', async (req, res) => {
         const ve = new DatVe({
             ma: count,
             maTour: reqMaTour,
+            uuid: reqUuid || null,
             ten: reqTen,
             cccd: reqCccd,
             email: reqEmail,
@@ -93,12 +62,12 @@ router.post('/', async (req, res) => {
 
         await ve.save();
 
-        return res.json({
+        return res.status(200).json({
             data: formDatVe(ve, tour),
             success: true,
         });
     } catch {
-        return res.json({
+        return res.status(400).json({
             success: false,
         });
     }

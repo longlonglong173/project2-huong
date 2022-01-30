@@ -1,4 +1,4 @@
-exports.tourForm = function tourForm(tour) {
+function tourForm(tour) {
     return {
         ma: tour.ma,
         ten: tour.ten,
@@ -12,9 +12,10 @@ exports.tourForm = function tourForm(tour) {
         hinhAnh: tour.hinhAnh,
         chiTiet: tour.chiTiet,
     };
-};
+}
+exports.tourForm = tourForm;
 
-exports.userForm = function (user, isGetToken = false) {
+userForm = function (user, isGetToken = false) {
     return {
         ma: user.ma,
         ten: user.ten || '',
@@ -27,3 +28,16 @@ exports.userForm = function (user, isGetToken = false) {
         token: isGetToken ? user.token : null,
     };
 };
+exports.userForm = userForm;
+
+formDatVe = function formDatVe(ve, tour) {
+    return {
+        ma: ve.ma,
+        thoiGianDat: ve.thoiGianDat,
+        tour: tour ? tourForm(tour) : { error: 'No tour data' },
+        thongTin: userForm(ve),
+        ghiChu: ve.ghiChu,
+    };
+};
+
+exports.formDatVe = formDatVe;
