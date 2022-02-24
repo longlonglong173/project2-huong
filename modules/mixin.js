@@ -11,6 +11,7 @@ function tourForm(tour) {
         diaDiem: tour.diaDiem,
         hinhAnh: tour.hinhAnh,
         chiTiet: tour.chiTiet,
+        slot: tour.slot,
     };
 }
 exports.tourForm = tourForm;

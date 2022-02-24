@@ -65,8 +65,8 @@ app.use('/layThongTinTour', layThongTinTour);
 const layDanhSachTourRoute = require('./routes/tour/layDanhSachTour');
 app.use('/layDanhSachTour', layDanhSachTourRoute);
 
-const timKiemTourTheoDiaDiemRoute = require('./routes/tour/timKiemTourTheoDiaDiem');
-app.use('/timKiemTourTheoDiaDiem', timKiemTourTheoDiaDiemRoute);
+const timKiem = require('./routes/tour/timKiem');
+app.use('/timKiem', timKiem);
 
 const xoaTourRoute = require('./routes/tour/xoaTour');
 app.use('/xoaTour', xoaTourRoute);

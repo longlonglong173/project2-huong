@@ -39,6 +39,13 @@ router.post('/', async (req, res) => {
             });
         }
 
+        if (tour.slot <= 0) {
+            return res.status(400).json({
+                success: false,
+                message: 'No Slot',
+            });
+        }
+
         const currentId = await IdList.findOne({
             name: 'DatVe',
         });
@@ -59,8 +66,10 @@ router.post('/', async (req, res) => {
 
         currentId.currentId = count;
         await currentId.save();
-
         await ve.save();
+
+        tour.slot = tour.slot - 1;
+        await tour.save();
 
         return res.status(200).json({
             data: formDatVe(ve, tour),
